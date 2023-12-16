@@ -1,0 +1,31 @@
+{
+    "name": "within ∙ url",
+    "description": "Opening specific URLs for selected text",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "css": ["./assets/index.css"],
+            "js": ["./assets/index.js"],
+            "matches": ["<all_urls>"],
+            "run_at": "document_end"
+        }
+    ],
+    "browser_action": {
+        "default_popup": "index.html",
+        "default_title": "within ∙ url"
+    },
+    "background": {
+        "page": "index.html",
+        "persistent": false
+    },
+    "icons": {
+        "128": "/icons/logo.svg"
+    },
+    "permissions": ["contextMenus", "tabs"],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "klaidukast17@gmail.com"
+        }
+    }
+}
