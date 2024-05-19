@@ -18,10 +18,16 @@ class ContextMenuHandler {
                 contexts: ["selection"]
             },
             () => {
-                if (Browser.runtime.lastError) {
-                    console.log(`Error creating context menu entry: ${Browser.runtime.lastError}`);
+                const entryExists = Browser.runtime.lastError?.message
+                    ?.toLowerCase()
+                    ?.includes("already exists");
 
-                    return;
+                if (entryExists) {
+                    Browser.contextMenus.update(entry.properties.id, {
+                        ...entry.properties,
+                        parentId: ContextMenuHandler._entryRoot.properties.id,
+                        contexts: ["selection"]
+                    });
                 }
 
                 ContextMenuHandler._entries.push(entry);
